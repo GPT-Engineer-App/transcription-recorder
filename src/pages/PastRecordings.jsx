@@ -2,23 +2,6 @@ import React, { useState } from "react";
 import { Box, Heading, Text, Image, Wrap, WrapItem, Tag, useDisclosure } from "@chakra-ui/react";
 import RecordingModal from "../components/RecordingModal";
 
-const recordings = [
-  {
-    id: 1,
-    image: "https://via.placeholder.com/150",
-    title: "Recording 1",
-    summary: "This is a summary of recording 1.",
-    tags: ["tag1", "tag2"],
-  },
-  {
-    id: 2,
-    image: "https://via.placeholder.com/150",
-    title: "Recording 2",
-    summary: "This is a summary of recording 2.",
-    tags: ["tag2", "tag3"],
-  },
-];
-
 const PastRecordings = ({ recordings }) => {
   const [selectedRecording, setSelectedRecording] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();

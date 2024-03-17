@@ -104,7 +104,6 @@ const Index = ({ recordings, setRecordings }) => {
               leftIcon={<FaCopy boxSize={4} />}
               mr={4}
               onClick={() => {
-                bg = "white";
                 navigator.clipboard.writeText(transcription);
                 toast({
                   title: "Copied to clipboard",
@@ -119,7 +118,6 @@ const Index = ({ recordings, setRecordings }) => {
             <Button
               leftIcon={<FaSave boxSize={4} />}
               onClick={() => {
-                bg = "white";
                 const newRecording = {
                   id: Date.now(),
                   image: "https://via.placeholder.com/150",
