@@ -4,9 +4,9 @@ import { Link as RouterLink } from "react-router-dom";
 
 const Navigation = () => {
   return (
-    <Box bg="white" py={4} boxShadow="md">
+    <Box bg="gray.100" py={4}>
       <Flex maxW="container.lg" mx="auto" align="center">
-        <Link as={RouterLink} to="/" fontWeight="bold" fontSize="xl" color="brand.700">
+        <Link as={RouterLink} to="/" fontWeight="bold" fontSize="xl">
           Audio Recorder
         </Link>
         <Spacer />

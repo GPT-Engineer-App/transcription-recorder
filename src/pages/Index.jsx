@@ -64,11 +64,11 @@ const Index = () => {
   ]);
 
   return (
-    <Center py={8}>
-      <VStack spacing={8} width="100%" maxWidth="container.md">
+    <Center minHeight="100vh" bg={getBackgroundColor()}>
+      <VStack spacing={8}>
         {emailMode === "work" && <EmailPreview emails={emails} />}
         <VStack spacing={4}>
-          <Heading as="h1" size="2xl" color="brand.700">
+          <Heading as="h1" size="2xl">
             Audio Recorder
           </Heading>
           <Select value={emailMode} onChange={handleEmailModeChange} width="200px">

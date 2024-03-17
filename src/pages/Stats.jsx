@@ -3,9 +3,9 @@ import { Box, VStack, Heading, Text, Divider } from "@chakra-ui/react";
 
 const Stats = () => {
   return (
-    <Box py={12}>
+    <Box bg="gray.100" minHeight="100vh" py={12}>
       <VStack spacing={8} maxW="container.md" mx="auto">
-        <Heading as="h1" size="2xl" color="brand.700">
+        <Heading as="h1" size="2xl" fontFamily="mono" color="gray.700">
           Recording Stats
         </Heading>
         <Divider borderColor="gray.400" />
