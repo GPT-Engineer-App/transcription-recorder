@@ -120,6 +120,14 @@ const Index = () => {
               leftIcon={<FaSave />}
               colorScheme="brand"
               onClick={() => {
+                const newRecording = {
+                  id: Date.now(),
+                  image: "https://via.placeholder.com/150",
+                  title: `Recording ${recordings.length + 1}`,
+                  summary: transcription,
+                  tags: ["tag1", "tag2"],
+                };
+                recordings.push(newRecording);
                 toast({
                   title: "Transcription saved",
                   status: "success",

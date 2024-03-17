@@ -21,17 +21,6 @@ const Stats = () => {
             AI Analysis: Based on the overall sentiment of the recordings, it appears that productivity peaks on Tuesdays and Fridays.
           </Text>
           <Divider borderColor="gray.400" />
-          <Box bg="white" p={6} borderRadius="md" boxShadow="md">
-            <Heading as="h2" size="lg" mb={4} fontFamily="mono">
-              To-dos based on yesterday's voice note:
-            </Heading>
-            <Text fontFamily="mono">
-              - Schedule team meeting
-              <br />
-              - Review latest project draft
-              <br />- Send updated invoice to client
-            </Text>
-          </Box>
         </VStack>
       </Center>
     </Box>
