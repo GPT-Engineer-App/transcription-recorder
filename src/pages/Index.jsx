@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Center, Heading, Text, VStack, useColorModeValue, Spinner, Box, IconButton, Select } from "@chakra-ui/react";
+import EmailPreview from "../components/EmailPreview";
 import { FaMicrophone, FaStop } from "react-icons/fa";
 
 const Index = () => {
@@ -54,9 +55,19 @@ const Index = () => {
     }
   };
 
+  const [emails, setEmails] = useState([
+    { subject: "Project Update", preview: "Hi team, just wanted to share the latest progress on..." },
+    { subject: "Invitation: Team Lunch", preview: "You're invited to join us for a team lunch on..." },
+    { subject: "Reminder: Performance Review", preview: "This is a friendly reminder that your performance review..." },
+    { subject: "New Client Proposal", preview: "Please find attached the proposal for our new client..." },
+    { subject: "Urgent: Server Downtime", preview: "We are currently experiencing server downtime. Our team..." },
+  ]);
+
   return (
     <Center minHeight="100vh" bg={getBackgroundColor()}>
       <VStack spacing={8}>
+        {emailMode === "work" && <EmailPreview emails={emails} />}
+        {emailMode === "work" && <EmailPreview emails={emails} />}
         <VStack spacing={4}>
           <Heading as="h1" size="2xl">
             Audio Recorder
