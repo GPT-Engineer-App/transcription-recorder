@@ -10,17 +10,22 @@ const Index = () => {
   const [isLocked, setIsLocked] = useState(false);
   const timerRef = useRef(null);
 
-  const startRecording = (event) => {
+  const startRecording = () => {
     setIsRecording(true);
     timerRef.current = setInterval(() => {
       setRecordingTime((prevTime) => prevTime + 1);
     }, 1000);
+  };
 
-    if (event.type === "mouseup" || event.type === "touchend") {
-      const { clientX } = event.type === "mouseup" ? event : event.changedTouches[0];
-      if (clientX > event.target.getBoundingClientRect().right - 50) {
-        setIsLocked(true);
-      }
+  const handleMouseMove = (event) => {
+    if (isRecording && event.clientX > event.target.getBoundingClientRect().right - 50) {
+      setIsLocked(true);
+    }
+  };
+
+  const handleTouchMove = (event) => {
+    if (isRecording && event.changedTouches[0].clientX > event.target.getBoundingClientRect().right - 50) {
+      setIsLocked(true);
     }
   };
 
@@ -49,7 +54,7 @@ const Index = () => {
         <Heading as="h1" size="2xl">
           Audio Recorder
         </Heading>
-        <Box borderWidth={2} borderRadius="full" p={8} cursor="pointer" onClick={isRecording && !isLocked ? stopRecording : startRecording} onMouseDown={startRecording} onMouseUp={startRecording} onTouchStart={startRecording} onTouchEnd={startRecording}>
+        <Box borderWidth={2} borderRadius="full" p={8} cursor="pointer" onClick={isRecording && !isLocked ? stopRecording : startRecording} onMouseDown={startRecording} onTouchStart={startRecording} onMouseMove={handleMouseMove} onTouchMove={handleTouchMove}>
           {isRecording ? <Icon as={FaStop} boxSize={12} color="red.500" /> : <Icon as={FaMicrophone} boxSize={12} />}
           {isLocked && <Icon as={FaLock} boxSize={6} color="green.500" position="absolute" top={2} right={2} />}
         </Box>
