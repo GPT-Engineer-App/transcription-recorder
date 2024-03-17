@@ -28,11 +28,11 @@ const DraggableArea = ({ children, onLock }) => {
   };
 
   return (
-    <Box ref={areaRef} position="relative" width="300px" height="200px" borderWidth={2} borderRadius="md" onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp}>
+    <Box ref={areaRef} position="fixed" inset={0} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp}>
       <Box position="absolute" left={position.x} top={position.y}>
         {children}
       </Box>
-      <Box position="absolute" right={0} top={0} bottom={0} width="100px" bg="gray.200" borderLeftWidth={2} />
+      <Box position="fixed" right={0} top={0} bottom={0} width="100px" bg="gray.200" borderLeftWidth={2} />
     </Box>
   );
 };
