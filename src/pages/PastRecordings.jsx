@@ -19,7 +19,7 @@ const recordings = [
   },
 ];
 
-const PastRecordings = () => {
+const PastRecordings = ({ recordings }) => {
   const [selectedRecording, setSelectedRecording] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
 

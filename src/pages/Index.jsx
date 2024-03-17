@@ -3,7 +3,7 @@ import { Center, Heading, Text, VStack, useColorModeValue, Spinner, Box, IconBut
 import EmailPreview from "../components/EmailPreview";
 import { FaMicrophone, FaStop, FaPlay, FaCopy, FaSave } from "react-icons/fa";
 
-const Index = () => {
+const Index = ({ recordings, setRecordings }) => {
   const toast = useToast();
   const [isRecording, setIsRecording] = useState(false);
   const [recordingTime, setRecordingTime] = useState(0);
@@ -63,8 +63,6 @@ const Index = () => {
     { subject: "New Client Proposal", preview: "Please find attached the proposal for our new client..." },
     { subject: "Urgent: Server Downtime", preview: "We are currently experiencing server downtime. Our team..." },
   ]);
-
-  const [recordings, setRecordings] = useState([]);
 
   return (
     <Center py={8}>
