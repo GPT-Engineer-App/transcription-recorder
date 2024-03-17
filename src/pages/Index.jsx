@@ -64,6 +64,8 @@ const Index = () => {
     { subject: "Urgent: Server Downtime", preview: "We are currently experiencing server downtime. Our team..." },
   ]);
 
+  const [recordings, setRecordings] = useState([]);
+
   return (
     <Center py={8}>
       <VStack spacing={8} width="100%" maxWidth="container.md">
@@ -127,7 +129,7 @@ const Index = () => {
                   summary: transcription,
                   tags: ["tag1", "tag2"],
                 };
-                recordings.push(newRecording);
+                setRecordings([...recordings, newRecording]);
                 toast({
                   title: "Transcription saved",
                   status: "success",
