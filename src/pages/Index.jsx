@@ -1,9 +1,10 @@
 import React, { useState, useRef } from "react";
-import { Center, Heading, Text, VStack, useColorModeValue, Spinner, Box, IconButton, Select, Button, Circle, Textarea } from "@chakra-ui/react";
+import { Center, Heading, Text, VStack, useColorModeValue, Spinner, Box, IconButton, Select, Button, Circle, Textarea, useToast } from "@chakra-ui/react";
 import EmailPreview from "../components/EmailPreview";
 import { FaMicrophone, FaStop, FaPlay, FaCopy, FaSave } from "react-icons/fa";
 
 const Index = () => {
+  const toast = useToast();
   const [isRecording, setIsRecording] = useState(false);
   const [recordingTime, setRecordingTime] = useState(0);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -106,11 +107,35 @@ const Index = () => {
             <Heading as="h2" size="lg" mb={4}>
               Transcription
             </Heading>
-            <Textarea value={transcription} readOnly mb={4} />
-            <Button leftIcon={<FaCopy />} colorScheme="brand" mr={4}>
+            <Textarea value={transcription} onChange={(e) => setTranscription(e.target.value)} mb={4} />
+            <Button
+              leftIcon={<FaCopy />}
+              colorScheme="brand"
+              mr={4}
+              onClick={() => {
+                navigator.clipboard.writeText(transcription);
+                toast({
+                  title: "Copied to clipboard",
+                  status: "success",
+                  duration: 2000,
+                  isClosable: true,
+                });
+              }}
+            >
               Copy
             </Button>
-            <Button leftIcon={<FaSave />} colorScheme="brand">
+            <Button
+              leftIcon={<FaSave />}
+              colorScheme="brand"
+              onClick={() => {
+                toast({
+                  title: "Transcription saved",
+                  status: "success",
+                  duration: 2000,
+                  isClosable: true,
+                });
+              }}
+            >
               Save
             </Button>
           </Box>
