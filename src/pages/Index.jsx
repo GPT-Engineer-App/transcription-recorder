@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Center, Heading, Text, VStack, useColorModeValue, Spinner, Box, IconButton } from "@chakra-ui/react";
+import { Center, Heading, Text, VStack, useColorModeValue, Spinner, Box, IconButton, Select } from "@chakra-ui/react";
 import { FaMicrophone, FaStop } from "react-icons/fa";
 
 const Index = () => {
@@ -7,6 +7,11 @@ const Index = () => {
   const [recordingTime, setRecordingTime] = useState(0);
   const [isProcessing, setIsProcessing] = useState(false);
   const [transcription, setTranscription] = useState("");
+  const [emailMode, setEmailMode] = useState("default");
+
+  const handleEmailModeChange = (event) => {
+    setEmailMode(event.target.value);
+  };
 
   const timerRef = useRef(null);
 
@@ -38,12 +43,30 @@ const Index = () => {
     return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
   };
 
+  const getBackgroundColor = () => {
+    switch (emailMode) {
+      case "work":
+        return "blue.100";
+      case "personal":
+        return "green.100";
+      default:
+        return useColorModeValue("gray.100", "gray.800");
+    }
+  };
+
   return (
-    <Center minHeight="100vh" bg={useColorModeValue("gray.100", "gray.800")}>
+    <Center minHeight="100vh" bg={getBackgroundColor()}>
       <VStack spacing={8}>
-        <Heading as="h1" size="2xl">
-          Audio Recorder
-        </Heading>
+        <VStack spacing={4}>
+          <Heading as="h1" size="2xl">
+            Audio Recorder
+          </Heading>
+          <Select value={emailMode} onChange={handleEmailModeChange} width="200px">
+            <option value="default">Default</option>
+            <option value="work">Work</option>
+            <option value="personal">Personal</option>
+          </Select>
+        </VStack>
         <IconButton icon={isRecording ? <FaStop /> : <FaMicrophone />} size="lg" colorScheme={isRecording ? "red" : "gray"} onClick={isRecording ? stopRecording : startRecording} borderRadius="full" />
         <Text fontSize="2xl">{formatTime(recordingTime)}</Text>
         {isProcessing && (
