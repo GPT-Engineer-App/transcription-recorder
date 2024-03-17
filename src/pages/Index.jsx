@@ -72,7 +72,7 @@ const Index = ({ recordings, setRecordings }) => {
         </Heading>
         <VStack spacing={4}>
           {!isRecording && (
-            <Button leftIcon={<FaMicrophone />} colorScheme="brand" size="lg" onClick={startRecording}>
+            <Button leftIcon={<FaMicrophone boxSize={4} />} size="lg" onClick={startRecording} bg="white">
               Start Recording
             </Button>
           )}
@@ -81,7 +81,7 @@ const Index = ({ recordings, setRecordings }) => {
               <Circle size="24px" bg="red.500" color="white" animation="pulse 1s infinite">
                 <Box as={FaMicrophone} />
               </Circle>
-              <Button leftIcon={<FaStop />} colorScheme="red" size="lg" onClick={stopRecording}>
+              <Button leftIcon={<FaStop boxSize={4} />} size="lg" onClick={stopRecording} bg="white">
                 Stop Recording
               </Button>
             </>
@@ -101,10 +101,10 @@ const Index = ({ recordings, setRecordings }) => {
             </Heading>
             <Textarea value={transcription} onChange={(e) => setTranscription(e.target.value)} mb={4} />
             <Button
-              leftIcon={<FaCopy />}
-              colorScheme="brand"
+              leftIcon={<FaCopy boxSize={4} />}
               mr={4}
               onClick={() => {
+                bg = "white";
                 navigator.clipboard.writeText(transcription);
                 toast({
                   title: "Copied to clipboard",
@@ -117,9 +117,9 @@ const Index = ({ recordings, setRecordings }) => {
               Copy
             </Button>
             <Button
-              leftIcon={<FaSave />}
-              colorScheme="brand"
+              leftIcon={<FaSave boxSize={4} />}
               onClick={() => {
+                bg = "white";
                 const newRecording = {
                   id: Date.now(),
                   image: "https://via.placeholder.com/150",
