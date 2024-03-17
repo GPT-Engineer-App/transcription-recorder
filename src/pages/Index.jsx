@@ -1,20 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Center, Heading, Text, VStack, useColorModeValue, Spinner, Box, IconButton, Select, Button, Circle, Textarea, useToast } from "@chakra-ui/react";
 import EmailPreview from "../components/EmailPreview";
 import { FaMicrophone, FaStop, FaPlay, FaCopy, FaSave } from "react-icons/fa";
 
-import TagSelector from "../components/TagSelector";
-
 const Index = ({ recordings, setRecordings }) => {
-  const [suggestedTags, setSuggestedTags] = useState([]);
-  const [selectedTags, setSelectedTags] = useState([]);
-
-  useEffect(() => {
-    if (transcription) {
-      const generatedTags = ["tag1", "tag2", "tag3", "tag4", "tag5"];
-      setSuggestedTags(generatedTags);
-    }
-  }, [transcription]);
   const toast = useToast();
   const [isRecording, setIsRecording] = useState(false);
   const [recordingTime, setRecordingTime] = useState(0);
@@ -126,7 +115,6 @@ const Index = ({ recordings, setRecordings }) => {
             >
               Copy
             </Button>
-            {suggestedTags.length > 0 && <TagSelector suggestedTags={suggestedTags} selectedTags={selectedTags} setSelectedTags={setSelectedTags} />}
             <Button
               leftIcon={<FaSave boxSize={4} />}
               onClick={() => {
@@ -135,7 +123,7 @@ const Index = ({ recordings, setRecordings }) => {
                   image: "https://via.placeholder.com/150",
                   title: `Recording ${recordings.length + 1}`,
                   summary: transcription,
-                  tags: selectedTags,
+                  tags: ["tag1", "tag2"],
                 };
                 setRecordings([...recordings, newRecording]);
                 toast({
