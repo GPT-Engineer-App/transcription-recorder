@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
-import { Box, Center, Heading, Text, VStack, useColorModeValue, Spinner, Icon } from "@chakra-ui/react";
-import { FaMicrophone, FaStop, FaLock, FaLockOpen } from "react-icons/fa";
+import { Center, Heading, Text, VStack, useColorModeValue, Spinner, Box } from "@chakra-ui/react";
+import DraggableArea from "../components/DraggableArea";
+import DraggableMic from "../components/DraggableMic";
 
 const Index = () => {
   const [isRecording, setIsRecording] = useState(false);
@@ -11,35 +12,29 @@ const Index = () => {
   const timerRef = useRef(null);
 
   const startRecording = () => {
-    setIsRecording(true);
-    timerRef.current = setInterval(() => {
-      setRecordingTime((prevTime) => prevTime + 1);
-    }, 1000);
-  };
-
-  const handleMouseMove = (event) => {
-    if (isRecording && event.clientX > event.target.getBoundingClientRect().right - 50) {
-      setIsLocked(true);
-    }
-  };
-
-  const handleTouchMove = (event) => {
-    if (isRecording && event.changedTouches[0].clientX > event.target.getBoundingClientRect().right - 50) {
-      setIsLocked(true);
+    if (!isRecording) {
+      setIsRecording(true);
+      timerRef.current = setInterval(() => {
+        setRecordingTime((prevTime) => prevTime + 1);
+      }, 1000);
     }
   };
 
   const stopRecording = () => {
-    if (!isLocked) {
+    if (isRecording && !isLocked) {
       setIsRecording(false);
       clearInterval(timerRef.current);
       setIsProcessing(true);
-    }
 
-    setTimeout(() => {
-      setTranscription("This is a sample transcription of the recorded audio. You can replace this with the actual transcription obtained from a speech-to-text service.");
-      setIsProcessing(false);
-    }, 2000);
+      setTimeout(() => {
+        setTranscription("This is a sample transcription of the recorded audio. You can replace this with the actual transcription obtained from a speech-to-text service.");
+        setIsProcessing(false);
+      }, 2000);
+    }
+  };
+
+  const handleLock = () => {
+    setIsLocked(true);
   };
 
   const formatTime = (time) => {
@@ -54,10 +49,9 @@ const Index = () => {
         <Heading as="h1" size="2xl">
           Audio Recorder
         </Heading>
-        <Box borderWidth={2} borderRadius="full" p={8} cursor="pointer" onClick={isRecording && !isLocked ? stopRecording : startRecording} onMouseDown={startRecording} onTouchStart={startRecording} onMouseMove={handleMouseMove} onTouchMove={handleTouchMove}>
-          {isRecording ? <Icon as={FaStop} boxSize={12} color="red.500" /> : <Icon as={FaMicrophone} boxSize={12} />}
-          {isLocked && <Icon as={FaLock} boxSize={6} color="green.500" position="absolute" top={2} right={2} />}
-        </Box>
+        <DraggableArea onLock={handleLock}>
+          <DraggableMic isRecording={isRecording} isLocked={isLocked} onClick={isRecording ? stopRecording : startRecording} />
+        </DraggableArea>
         <Text fontSize="2xl">{formatTime(recordingTime)}</Text>
         {isProcessing && (
           <Box>
