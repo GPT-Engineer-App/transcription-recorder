@@ -1,5 +1,6 @@
-import React from "react";
-import { Box, Heading, Text, Image, Wrap, WrapItem, Tag } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { Box, Heading, Text, Image, Wrap, WrapItem, Tag, useDisclosure } from "@chakra-ui/react";
+import RecordingModal from "../components/RecordingModal";
 
 const recordings = [
   {
@@ -19,14 +20,21 @@ const recordings = [
 ];
 
 const PastRecordings = () => {
+  const [selectedRecording, setSelectedRecording] = useState(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const openModal = (recording) => {
+    setSelectedRecording(recording);
+    onOpen();
+  };
+
   return (
     <Box maxWidth="container.lg" mx="auto" py={8}>
-      <Heading mb={8}>Past Recordings</Heading>
       <Wrap spacing={8}>
         {recordings.map((recording) => (
-          <WrapItem key={recording.id}>
+          <WrapItem key={recording.id} onClick={() => openModal(recording)} cursor="pointer">
             <Box maxWidth="sm" borderWidth={1} borderRadius="lg" overflow="hidden">
-              <Image src={recording.image} alt={recording.title} />
+              <Image src={recording.image} alt={recording.title} width="100%" />
               <Box p={6}>
                 <Heading as="h3" size="md" mb={2}>
                   {recording.title}
@@ -44,6 +52,7 @@ const PastRecordings = () => {
           </WrapItem>
         ))}
       </Wrap>
+      <RecordingModal isOpen={isOpen} onClose={onClose} recording={selectedRecording} />
     </Box>
   );
 };
