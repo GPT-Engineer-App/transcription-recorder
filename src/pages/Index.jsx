@@ -1,14 +1,13 @@
 import React, { useState, useRef } from "react";
-import { Center, Heading, Text, VStack, useColorModeValue, Spinner, Box } from "@chakra-ui/react";
-import DraggableArea from "../components/DraggableArea";
-import DraggableMic from "../components/DraggableMic";
+import { Center, Heading, Text, VStack, useColorModeValue, Spinner, Box, IconButton } from "@chakra-ui/react";
+import { FaMicrophone, FaStop } from "react-icons/fa";
 
 const Index = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [recordingTime, setRecordingTime] = useState(0);
   const [isProcessing, setIsProcessing] = useState(false);
   const [transcription, setTranscription] = useState("");
-  const [isLocked, setIsLocked] = useState(false);
+
   const timerRef = useRef(null);
 
   const startRecording = () => {
@@ -21,7 +20,7 @@ const Index = () => {
   };
 
   const stopRecording = () => {
-    if (isRecording && !isLocked) {
+    if (isRecording) {
       setIsRecording(false);
       clearInterval(timerRef.current);
       setIsProcessing(true);
@@ -31,10 +30,6 @@ const Index = () => {
         setIsProcessing(false);
       }, 2000);
     }
-  };
-
-  const handleLock = () => {
-    setIsLocked(true);
   };
 
   const formatTime = (time) => {
@@ -49,9 +44,7 @@ const Index = () => {
         <Heading as="h1" size="2xl">
           Audio Recorder
         </Heading>
-        <DraggableArea onLock={handleLock}>
-          <DraggableMic isRecording={isRecording} isLocked={isLocked} onClick={isRecording ? stopRecording : startRecording} />
-        </DraggableArea>
+        <IconButton icon={isRecording ? <FaStop /> : <FaMicrophone />} size="lg" colorScheme={isRecording ? "red" : "gray"} onClick={isRecording ? stopRecording : startRecording} borderRadius="full" />
         <Text fontSize="2xl">{formatTime(recordingTime)}</Text>
         {isProcessing && (
           <Box>
