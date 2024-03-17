@@ -67,7 +67,6 @@ const Index = () => {
     <Center minHeight="100vh" bg={getBackgroundColor()}>
       <VStack spacing={8}>
         {emailMode === "work" && <EmailPreview emails={emails} />}
-        {emailMode === "work" && <EmailPreview emails={emails} />}
         <VStack spacing={4}>
           <Heading as="h1" size="2xl">
             Audio Recorder
