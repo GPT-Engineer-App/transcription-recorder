@@ -1,6 +1,7 @@
 import React from "react";
-import { Box, Flex, Spacer, Link } from "@chakra-ui/react";
+import { Box, Flex, Spacer, Link, Icon } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
+import { FaMicrophone, FaHistory, FaChartBar, FaCog, FaStar } from "react-icons/fa";
 
 const Navigation = () => {
   return (
@@ -11,16 +12,16 @@ const Navigation = () => {
         </Link>
         <Spacer />
         <Link as={RouterLink} to="/past-recordings" mr={4}>
-          Past Recordings
+          <Icon as={FaHistory} boxSize={6} />
         </Link>
         <Link as={RouterLink} to="/stats">
-          Stats
+          <Icon as={FaChartBar} boxSize={6} />
         </Link>
         <Link as={RouterLink} to="/settings" ml={4}>
-          Settings
+          <Icon as={FaCog} boxSize={6} />
         </Link>
         <Link as={RouterLink} to="/upgrade" ml={4}>
-          Upgrade
+          <Icon as={FaStar} boxSize={6} />
         </Link>
       </Flex>
     </Box>
