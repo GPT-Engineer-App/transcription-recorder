@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, FormControl, FormLabel, Input, Button, useToast, VStack, Heading, Slider, SliderTrack, SliderFilledTrack, SliderThumb, Text, Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react";
+import { Box, FormControl, FormLabel, Input, Button, useToast, VStack, Heading, Text, Switch } from "@chakra-ui/react";
 
 const Settings = () => {
   const toast = useToast();
@@ -37,15 +37,12 @@ const Settings = () => {
             Save API Key
           </Button>
         </FormControl>
-        <FormControl id="save-to-obsidian">
-          <FormLabel>Save to Obsidian Vault</FormLabel>
-          <Slider aria-label="save-to-obsidian" defaultValue={saveToObsidian ? 1 : 0} min={0} max={1} step={1} onChange={(value) => setSaveToObsidian(value === 1)}>
-            <SliderTrack>
-              <SliderFilledTrack bg={saveToObsidian ? "brand.500" : "gray.300"} />
-            </SliderTrack>
-            <SliderThumb boxSize={6} />
-          </Slider>
-          <Text mt={2}>{saveToObsidian ? "Enabled" : "Disabled"}</Text>
+        <FormControl display="flex" alignItems="center">
+          <FormLabel htmlFor="save-to-obsidian" mb="0">
+            Save to Obsidian Vault
+          </FormLabel>
+          <Switch id="save-to-obsidian" isChecked={saveToObsidian} onChange={(event) => setSaveToObsidian(event.target.checked)} />
+          <Text ml={2}>{saveToObsidian ? "On" : "Off"}</Text>
         </FormControl>
         <Box width="100%">
           <Heading as="h2" size="lg" mb={4}>
