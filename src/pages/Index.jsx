@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
-import { Center, Heading, Text, VStack, useColorModeValue, Spinner, Box, IconButton, Select } from "@chakra-ui/react";
+import { Center, Heading, Text, VStack, useColorModeValue, Spinner, Box, IconButton, Select, Button, Circle, Textarea } from "@chakra-ui/react";
 import EmailPreview from "../components/EmailPreview";
-import { FaMicrophone, FaStop } from "react-icons/fa";
+import { FaMicrophone, FaStop, FaPlay, FaCopy, FaSave } from "react-icons/fa";
 
 const Index = () => {
   const [isRecording, setIsRecording] = useState(false);
@@ -77,8 +77,24 @@ const Index = () => {
             <option value="personal">Personal</option>
           </Select>
         </VStack>
-        <IconButton icon={isRecording ? <FaStop /> : <FaMicrophone />} size="lg" colorScheme={isRecording ? "red" : "gray"} onClick={isRecording ? stopRecording : startRecording} borderRadius="full" />
-        <Text fontSize="2xl">{formatTime(recordingTime)}</Text>
+        <VStack spacing={4}>
+          {!isRecording && (
+            <Button leftIcon={<FaMicrophone />} colorScheme="brand" size="lg" onClick={startRecording}>
+              Start Recording
+            </Button>
+          )}
+          {isRecording && (
+            <>
+              <Circle size="24px" bg="red.500" color="white" animation="pulse 1s infinite">
+                <Box as={FaMicrophone} />
+              </Circle>
+              <Button leftIcon={<FaStop />} colorScheme="red" size="lg" onClick={stopRecording}>
+                Stop Recording
+              </Button>
+            </>
+          )}
+          <Text fontSize="2xl">{formatTime(recordingTime)}</Text>
+        </VStack>
         {isProcessing && (
           <Box>
             <Spinner size="xl" />
@@ -86,11 +102,17 @@ const Index = () => {
           </Box>
         )}
         {!isProcessing && transcription && (
-          <Box maxWidth="md" p={4} borderWidth={1} borderRadius="md">
+          <Box maxWidth="md" p={6} borderWidth={1} borderRadius="md" bg="white" boxShadow="md">
             <Heading as="h2" size="lg" mb={4}>
               Transcription
             </Heading>
-            <Text>{transcription}</Text>
+            <Textarea value={transcription} readOnly mb={4} />
+            <Button leftIcon={<FaCopy />} colorScheme="brand" mr={4}>
+              Copy
+            </Button>
+            <Button leftIcon={<FaSave />} colorScheme="brand">
+              Save
+            </Button>
           </Box>
         )}
       </VStack>
