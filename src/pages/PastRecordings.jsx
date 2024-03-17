@@ -30,6 +30,9 @@ const PastRecordings = () => {
 
   return (
     <Box maxWidth="container.lg" mx="auto" py={8}>
+      <Heading as="h1" size="2xl" mb={8} color="brand.700">
+        Past Recordings
+      </Heading>
       <Wrap spacing={8}>
         {recordings.map((recording) => (
           <WrapItem key={recording.id} onClick={() => openModal(recording)} cursor="pointer">
