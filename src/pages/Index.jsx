@@ -67,17 +67,9 @@ const Index = () => {
   return (
     <Center py={8}>
       <VStack spacing={8} width="100%" maxWidth="container.md">
-        {emailMode === "work" && <EmailPreview emails={emails} />}
-        <VStack spacing={4}>
-          <Heading as="h1" size="2xl" color="brand.700">
-            Audio Recorder
-          </Heading>
-          <Select value={emailMode} onChange={handleEmailModeChange} width="200px">
-            <option value="default">Default</option>
-            <option value="work">Work</option>
-            <option value="personal">Personal</option>
-          </Select>
-        </VStack>
+        <Heading as="h1" size="2xl" color="brand.700">
+          Audio Recorder
+        </Heading>
         <VStack spacing={4}>
           {!isRecording && (
             <Button leftIcon={<FaMicrophone />} colorScheme="brand" size="lg" onClick={startRecording}>
